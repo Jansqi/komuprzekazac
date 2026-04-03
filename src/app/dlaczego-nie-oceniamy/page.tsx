@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/dlaczego-nie-oceniamy' },
   title: 'Dlaczego nie oceniamy organizacji',
   description: 'Wyjaśniamy, dlaczego KomuPrzekazac.pl nie stosuje scoringu ani rankingów organizacji pożytku publicznego.',
   openGraph: {

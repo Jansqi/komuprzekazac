@@ -4,6 +4,7 @@ import { getCategoryCounts, getMeta } from '@/lib/data';
 import { CATEGORIES } from '@/lib/constants';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/' },
   openGraph: {
     title: 'KomuPrzekazac.pl — Sprawdź organizacje pożytku publicznego',
     description: 'Porównaj 9 671 organizacji pożytku publicznego. Dane finansowe, opisy działalności, sygnały transparentności. Wybierz świadomie, komu przekazać 1,5% podatku.',

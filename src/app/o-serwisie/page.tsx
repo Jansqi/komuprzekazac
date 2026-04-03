@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/o-serwisie' },
   title: 'O serwisie',
   description: 'KomuPrzekazac.pl — niezależny serwis informacyjny o organizacjach pożytku publicznego.',
   openGraph: {

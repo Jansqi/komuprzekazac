@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/polityka-prywatnosci' },
   title: 'Polityka prywatności',
   description: 'Polityka prywatności serwisu KomuPrzekazac.pl',
   openGraph: {

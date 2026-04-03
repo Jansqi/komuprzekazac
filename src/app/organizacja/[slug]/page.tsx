@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const org = getOrganizationBySlug(slug);
   if (!org) return {};
   return {
+    alternates: { canonical: `/organizacja/${slug}` },
     title: `${org.name} — KRS ${org.krs_number}`,
     description: `${org.ai_summary} Przekaż 1,5% podatku na KRS ${org.krs_number}.`,
     openGraph: {
