@@ -1,0 +1,90 @@
+export const CATEGORIES: Record<string, string> = {
+  'sport': 'Sport i rekreacja',
+  'niepelnosprawnosc': 'Osoby z niepełnosprawnościami',
+  'edukacja': 'Edukacja i nauka',
+  'zdrowie': 'Ochrona zdrowia',
+  'kultura': 'Kultura i sztuka',
+  'spoleczenstwo-obywatelskie': 'Społeczeństwo obywatelskie',
+  'pomoc-spoleczna': 'Pomoc społeczna',
+  'dzieci-i-rodzina': 'Dzieci i rodzina',
+  'ratownictwo': 'Ratownictwo i bezpieczeństwo',
+  'zdrowie-psychiczne': 'Zdrowie psychiczne',
+  'zwierzeta': 'Ochrona zwierząt',
+  'srodowisko': 'Środowisko i ekologia',
+  'prawa-i-wolnosci': 'Prawa i wolności obywatelskie',
+  'seniorzy': 'Seniorzy',
+  'religia': 'Działalność wyznaniowa',
+  'wspolpraca-miedzynarodowa': 'Współpraca międzynarodowa',
+  'turystyka': 'Turystyka i krajoznawstwo',
+  'inne': 'Inne',
+};
+
+export const VOIVODESHIPS: Record<string, string> = {
+  'DOLNOŚLĄSKIE': 'dolnoslaskie',
+  'KUJAWSKO-POMORSKIE': 'kujawsko-pomorskie',
+  'LUBELSKIE': 'lubelskie',
+  'LUBUSKIE': 'lubuskie',
+  'ŁÓDZKIE': 'lodzkie',
+  'MAŁOPOLSKIE': 'malopolskie',
+  'MAZOWIECKIE': 'mazowieckie',
+  'OPOLSKIE': 'opolskie',
+  'PODKARPACKIE': 'podkarpackie',
+  'PODLASKIE': 'podlaskie',
+  'POMORSKIE': 'pomorskie',
+  'ŚLĄSKIE': 'slaskie',
+  'ŚWIĘTOKRZYSKIE': 'swietokrzyskie',
+  'WARMIŃSKO-MAZURSKIE': 'warminsko-mazurskie',
+  'WIELKOPOLSKIE': 'wielkopolskie',
+  'ZACHODNIOPOMORSKIE': 'zachodniopomorskie',
+};
+
+export const VOIVODESHIP_NAMES: Record<string, string> = {
+  'dolnoslaskie': 'Dolnośląskie',
+  'kujawsko-pomorskie': 'Kujawsko-Pomorskie',
+  'lubelskie': 'Lubelskie',
+  'lubuskie': 'Lubuskie',
+  'lodzkie': 'Łódzkie',
+  'malopolskie': 'Małopolskie',
+  'mazowieckie': 'Mazowieckie',
+  'opolskie': 'Opolskie',
+  'podkarpackie': 'Podkarpackie',
+  'podlaskie': 'Podlaskie',
+  'pomorskie': 'Pomorskie',
+  'slaskie': 'Śląskie',
+  'swietokrzyskie': 'Świętokrzyskie',
+  'warminsko-mazurskie': 'Warmińsko-Mazurskie',
+  'wielkopolskie': 'Wielkopolskie',
+  'zachodniopomorskie': 'Zachodniopomorskie',
+};
+
+export const BENEFICIARY_TAGS: Record<string, string> = {
+  'dzieci': 'Dzieci',
+  'mlodziez': 'Młodzież',
+  'dorosli': 'Dorośli',
+  'seniorzy': 'Seniorzy',
+  'osoby-z-niepelnosprawnosciami': 'Osoby z niepełnosprawnościami',
+  'rodziny': 'Rodziny',
+  'kobiety': 'Kobiety',
+  'mezczyzni': 'Mężczyźni',
+  'bezdomni': 'Bezdomni',
+  'chorzy': 'Chorzy',
+  'zwierzeta': 'Zwierzęta',
+  'spolecznosc-lokalna': 'Społeczność lokalna',
+  'ogol-spoleczenstwa': 'Ogół społeczeństwa',
+  'polonia': 'Polonia i Polacy za granicą',
+};
+
+export const SCOPE_LABELS: Record<string, string> = {
+  'lokalny': 'Lokalny',
+  'regionalny': 'Regionalny',
+  'krajowy': 'Krajowy',
+  'miedzynarodowy': 'Międzynarodowy',
+};
+
+export const SIZE_LABELS: Record<string, string> = {
+  'mikro': 'Mikro (<10 tys. zł)',
+  'mala': 'Mała (10–100 tys. zł)',
+  'srednia': 'Średnia (100 tys.–1 mln zł)',
+  'duza': 'Duża (1–10 mln zł)',
+  'bardzo-duza': 'Bardzo duża (>10 mln zł)',
+};
