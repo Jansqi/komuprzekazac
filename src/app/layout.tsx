@@ -10,6 +10,11 @@ export const metadata: Metadata = {
   description:
     "Porównaj 9 671 organizacji pożytku publicznego. Dane finansowe, opisy działalności, sygnały transparentności. Wybierz świadomie, komu przekazać 1,5% podatku.",
   metadataBase: new URL("https://komuprzekazac.pl"),
+  openGraph: {
+    siteName: "KomuPrzekazac.pl",
+    locale: "pl_PL",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

@@ -1,6 +1,14 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { getCategoryCounts, getMeta } from '@/lib/data';
 import { CATEGORIES } from '@/lib/constants';
+
+export const metadata: Metadata = {
+  openGraph: {
+    title: 'KomuPrzekazac.pl — Sprawdź organizacje pożytku publicznego',
+    description: 'Porównaj 9 671 organizacji pożytku publicznego. Dane finansowe, opisy działalności, sygnały transparentności. Wybierz świadomie, komu przekazać 1,5% podatku.',
+  },
+};
 
 const CATEGORY_ICONS: Record<string, string> = {
   'sport': '⚽',

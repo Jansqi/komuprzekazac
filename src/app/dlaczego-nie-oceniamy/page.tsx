@@ -3,6 +3,10 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Dlaczego nie oceniamy organizacji',
   description: 'Wyjaśniamy, dlaczego KomuPrzekazac.pl nie stosuje scoringu ani rankingów organizacji pożytku publicznego.',
+  openGraph: {
+    title: 'Dlaczego nie oceniamy organizacji | KomuPrzekazac.pl',
+    description: 'Wyjaśniamy, dlaczego KomuPrzekazac.pl nie stosuje scoringu ani rankingów organizacji pożytku publicznego.',
+  },
 };
 
 export default function WhyNoRatingPage() {

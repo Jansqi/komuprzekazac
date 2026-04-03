@@ -4,6 +4,10 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'O serwisie',
   description: 'KomuPrzekazac.pl — niezależny serwis informacyjny o organizacjach pożytku publicznego.',
+  openGraph: {
+    title: 'O serwisie | KomuPrzekazac.pl',
+    description: 'KomuPrzekazac.pl — niezależny serwis informacyjny o organizacjach pożytku publicznego.',
+  },
 };
 
 export default function AboutPage() {

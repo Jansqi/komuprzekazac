@@ -12,9 +12,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const name = VOIVODESHIP_NAMES[slug];
   if (!name) return {};
+  const description = `Lista organizacji pożytku publicznego w województwie ${name.toLowerCase()}.`;
   return {
     title: `Organizacje OPP — woj. ${name}`,
-    description: `Lista organizacji pożytku publicznego w województwie ${name.toLowerCase()}.`,
+    description,
+    openGraph: {
+      title: `Organizacje OPP — woj. ${name} | KomuPrzekazac.pl`,
+      description,
+    },
   };
 }
 

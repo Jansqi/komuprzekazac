@@ -3,6 +3,10 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Polityka prywatności',
   description: 'Polityka prywatności serwisu KomuPrzekazac.pl',
+  openGraph: {
+    title: 'Polityka prywatności | KomuPrzekazac.pl',
+    description: 'Polityka prywatności serwisu KomuPrzekazac.pl',
+  },
 };
 
 export default function PrivacyPage() {

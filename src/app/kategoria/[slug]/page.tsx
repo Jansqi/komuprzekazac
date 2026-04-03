@@ -13,9 +13,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const name = CATEGORIES[slug];
   if (!name) return {};
+  const description = `Lista organizacji pożytku publicznego w kategorii ${name}. Dane finansowe, opisy, sygnały transparentności.`;
   return {
     title: `${name} — organizacje pożytku publicznego`,
-    description: `Lista organizacji pożytku publicznego w kategorii ${name}. Dane finansowe, opisy, sygnały transparentności.`,
+    description,
+    openGraph: {
+      title: `${name} — organizacje OPP | KomuPrzekazac.pl`,
+      description,
+    },
   };
 }
 
