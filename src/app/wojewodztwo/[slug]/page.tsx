@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getOrganizationsByVoivodeship } from '@/lib/data';
-import { VOIVODESHIPS, VOIVODESHIP_NAMES } from '@/lib/constants';
+import { VOIVODESHIPS, VOIVODESHIP_NAMES, CATEGORIES } from '@/lib/constants';
 import OrgList from '@/components/OrgList';
 
 export async function generateStaticParams() {
@@ -35,6 +36,13 @@ export default async function VoivodeshipPage({ params }: { params: Promise<{ sl
 
   const orgs = getOrganizationsByVoivodeship(voivUpper);
 
+  // Count orgs per primary category, sorted by count descending
+  const catCounts: Record<string, number> = {};
+  for (const org of orgs) {
+    catCounts[org.primary_category] = (catCounts[org.primary_category] || 0) + 1;
+  }
+  const sortedCats = Object.entries(catCounts).sort((a, b) => b[1] - a[1]);
+
   const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -54,9 +62,27 @@ export default async function VoivodeshipPage({ params }: { params: Promise<{ sl
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
           Województwo {name}
         </h1>
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-600 mb-8">
           {orgs.length.toLocaleString('pl-PL')} organizacji pożytku publicznego
         </p>
+
+        {/* Category breakdown */}
+        <section className="mb-8">
+          <h2 className="text-lg font-semibold text-gray-900 mb-3">Kategorie</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {sortedCats.map(([catSlug, count]) => (
+              <Link
+                key={catSlug}
+                href={`/kategoria/${catSlug}`}
+                className="flex items-center justify-between px-3 py-2 rounded-lg border border-gray-200 hover:border-blue-200 transition-colors text-sm"
+              >
+                <span className="text-gray-900">{CATEGORIES[catSlug] || catSlug}</span>
+                <span className="text-gray-500">{count}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         <OrgList organizations={orgs} />
       </div>
     </>
