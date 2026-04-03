@@ -74,7 +74,7 @@ export default async function VoivodeshipPage({ params }: { params: Promise<{ sl
               <Link
                 key={catSlug}
                 href={`/kategoria/${catSlug}`}
-                className="flex items-center justify-between px-3 py-2 rounded-lg border border-gray-200 hover:border-blue-200 transition-colors text-sm"
+                className="flex items-center justify-between px-3 py-2 rounded-lg border border-gray-200 hover:border-[#00b9fb] transition-colors text-sm"
               >
                 <span className="text-gray-900">{CATEGORIES[catSlug] || catSlug}</span>
                 <span className="text-gray-500">{count}</span>

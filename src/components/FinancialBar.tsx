@@ -4,6 +4,7 @@ interface Segment {
   label: string;
   value: number;
   color: string;
+  opacity?: number;
 }
 
 export default function FinancialBar({ segments }: { segments: Segment[] }) {
@@ -28,7 +29,7 @@ export default function FinancialBar({ segments }: { segments: Segment[] }) {
             <div
               key={i}
               className="flex items-center justify-center text-xs text-white font-medium"
-              style={{ width: `${pct}%`, backgroundColor: s.color, minWidth: pct > 5 ? 'auto' : 0 }}
+              style={{ width: `${pct}%`, backgroundColor: s.color, opacity: s.opacity ?? 1, minWidth: pct > 5 ? 'auto' : 0 }}
               title={`${s.label}: ${pct.toFixed(1)}%`}
               aria-hidden="true"
             >
@@ -43,7 +44,7 @@ export default function FinancialBar({ segments }: { segments: Segment[] }) {
           if (pct < 1) return null;
           return (
             <div key={i} className="flex items-center gap-1">
-              <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: s.color }} />
+              <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: s.color, opacity: s.opacity ?? 1 }} />
               {s.label}: {Math.round(pct)}%
             </div>
           );

@@ -15,7 +15,7 @@ export default function OrgList({ organizations, page = 1 }: { organizations: Or
         <Link
           key={org.krs_number}
           href={`/organizacja/${org.slug}`}
-          className="card block hover:border-blue-200 transition-colors"
+          className="card block hover:border-[#00b9fb] transition-colors"
         >
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
             <div className="flex-1 min-w-0">
@@ -41,7 +41,7 @@ export default function OrgList({ organizations, page = 1 }: { organizations: Or
       {organizations.length > PER_PAGE && (
         <p className="text-sm text-gray-400 text-center pt-4">
           Pokazano {Math.min(shown.length, PER_PAGE)} z {organizations.length} organizacji.
-          Użyj <Link href="/szukaj" className="text-blue-600 underline">wyszukiwarki</Link> aby przefiltrować wyniki.
+          Użyj <Link href="/szukaj" className="text-[#00b9fb] underline">wyszukiwarki</Link> aby przefiltrować wyniki.
         </p>
       )}
     </div>

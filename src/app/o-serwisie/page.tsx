@@ -43,7 +43,7 @@ export default function AboutPage() {
           należy do Ciebie.
         </p>
         <p>
-          <Link href="/dlaczego-nie-oceniamy" className="text-blue-600 hover:text-blue-800">
+          <Link href="/dlaczego-nie-oceniamy" className="text-[#00b9fb] hover:text-[#009dd4]">
             Przeczytaj więcej o naszym podejściu →
           </Link>
         </p>
@@ -57,7 +57,7 @@ export default function AboutPage() {
         <h2 className="text-xl font-semibold mt-8">Kontakt</h2>
         <p>
           Serwis prowadzony jest przez Upgraider (JDG). Pytania i uwagi:{' '}
-          <a href="mailto:janrogulski@gmail.com" className="text-blue-600 hover:text-blue-800">
+          <a href="mailto:janrogulski@gmail.com" className="text-[#00b9fb] hover:text-[#009dd4]">
             janrogulski@gmail.com
           </a>
         </p>

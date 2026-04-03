@@ -9,7 +9,7 @@ export default function ShowEmail({ email }: { email: string }) {
     return (
       <button
         onClick={() => setVisible(true)}
-        className="text-sm text-blue-600 hover:text-blue-800 underline"
+        className="text-sm text-[#00b9fb] hover:text-[#009dd4] underline"
         aria-label="Pokaż adres email kontaktowy"
       >
         Pokaż email
@@ -18,7 +18,7 @@ export default function ShowEmail({ email }: { email: string }) {
   }
 
   return (
-    <a href={`mailto:${email}`} className="text-sm text-blue-600 hover:text-blue-800">
+    <a href={`mailto:${email}`} className="text-sm text-[#00b9fb] hover:text-[#009dd4]">
       {email}
     </a>
   );

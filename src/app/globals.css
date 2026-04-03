@@ -3,20 +3,18 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-  --primary: #1e40af;
-  --primary-light: #3b82f6;
-  --muted: #6b7280;
-  --muted-bg: #f3f4f6;
+  --foreground: #1a1a1a;
+  --color-primary: #00b9fb;
+  --color-primary-hover: #009dd4;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b7280;
   --border: #e5e7eb;
-  --success: #16a34a;
-  --danger: #dc2626;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 @layer components {
@@ -33,13 +31,14 @@ body {
   }
 
   .badge-primary {
-    background-color: #dbeafe;
-    color: #1e40af;
+    background-color: #00b9fb;
+    color: #ffffff;
   }
 
   .badge-secondary {
-    background-color: #f3f4f6;
-    color: #374151;
+    background-color: #ffffff;
+    color: #00b9fb;
+    border: 1px solid #00b9fb;
   }
 
   /* Container card */

@@ -200,14 +200,14 @@ function SearchPageInner() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Wpisz nazwę, numer KRS, miasto..."
-          className="w-full px-4 py-3 border border-gray-300 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 border border-gray-300 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-[#00b9fb]/50 focus:border-transparent"
         />
       </div>
 
       {/* Filter toggle (mobile) */}
       <button
         onClick={() => setShowFilters(!showFilters)}
-        className="md:hidden mb-4 text-sm text-blue-600 hover:text-blue-800"
+        className="md:hidden mb-4 text-sm text-[#00b9fb] hover:text-[#009dd4]"
         aria-expanded={showFilters}
         aria-controls="search-filters"
       >
@@ -290,7 +290,7 @@ function SearchPageInner() {
 
             <button
               onClick={resetFilters}
-              className="text-sm text-gray-500 hover:text-blue-600"
+              className="text-sm text-gray-500 hover:text-[#00b9fb]"
             >
               Resetuj filtry
             </button>
@@ -309,7 +309,7 @@ function SearchPageInner() {
               <Link
                 key={org.krs_number}
                 href={`/organizacja/${org.slug}`}
-                className="card block hover:border-blue-200 transition-colors"
+                className="card block hover:border-[#00b9fb] transition-colors"
               >
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
                   <div className="flex-1 min-w-0">

@@ -59,22 +59,22 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(searchActionLd) }}
       />
       {/* Hero */}
-      <section className="bg-gradient-to-b from-blue-50 to-white py-16 md:py-24">
+      <section className="bg-[#00b9fb] py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
             Komu przekazać 1,5% podatku?
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Porównaj {meta.record_count.toLocaleString('pl-PL')} organizacji pożytku publicznego.
             Dane finansowe, opisy działalności, sygnały transparentności — wszystko w jednym miejscu.
           </p>
           <Link
             href="/szukaj"
-            className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-medium hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 bg-white text-[#00b9fb] px-8 py-4 rounded-xl text-lg font-medium hover:bg-white/90 transition-colors"
           >
             🔍 Szukaj organizacji
           </Link>
-          <p className="text-sm text-gray-400 mt-4">
+          <p className="text-sm text-white/70 mt-4">
             Dane ze sprawozdań za rok {meta.report_year}
           </p>
         </div>
@@ -88,7 +88,7 @@ export default function HomePage() {
             <Link
               key={slug}
               href={`/kategoria/${slug}`}
-              className="card flex items-center gap-4 hover:border-blue-200 transition-colors"
+              className="card flex items-center gap-4 border-l-4 border-l-[#00b9fb] hover:border-[#00b9fb] transition-colors"
             >
               <span className="text-2xl">{CATEGORY_ICONS[slug] || '📁'}</span>
               <div>
@@ -117,7 +117,7 @@ export default function HomePage() {
               i sygnały transparentności, abyś mógł podjąć decyzję samodzielnie.
             </p>
           </div>
-          <Link href="/o-serwisie" className="text-blue-600 hover:text-blue-800 text-sm mt-4 inline-block">
+          <Link href="/o-serwisie" className="text-[#00b9fb] hover:text-[#009dd4] text-sm mt-4 inline-block">
             Dowiedz się więcej →
           </Link>
         </div>

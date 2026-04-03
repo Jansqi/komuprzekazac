@@ -109,7 +109,7 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
         </div>
 
         {/* AI Summary */}
-        <div className="bg-blue-50 border border-blue-100 rounded-xl p-5 mb-8">
+        <div className="bg-[#00b9fb]/10 border border-[#00b9fb]/20 rounded-xl p-5 mb-8">
           <p className="text-gray-800 leading-relaxed">{org.ai_summary}</p>
         </div>
 
@@ -120,7 +120,7 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
               href={org.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 underline"
+              className="text-[#00b9fb] hover:text-[#009dd4] underline"
             >
               🌐 Strona WWW
             </a>
@@ -130,7 +130,7 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
             href={`https://ekrs.ms.gov.pl/web/wyszukiwarka-krs/strona-glowna/index.html`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 underline"
+            className="text-[#00b9fb] hover:text-[#009dd4] underline"
           >
             📋 Sprawdź w eKRS
           </a>
@@ -175,7 +175,7 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
               </div>
               <div className="card">
                 <p className="text-sm text-gray-500">Przychody z 1,5% podatku</p>
-                <p className="text-2xl font-bold text-blue-700">{formatPLN(org.revenue_15pct)}</p>
+                <p className="text-2xl font-bold text-[#00b9fb]">{formatPLN(org.revenue_15pct)}</p>
                 {revFromTaxPct !== null && (
                   <p className="text-xs text-gray-500 mt-1">
                     {formatPercent(revFromTaxPct)} przychodów ogółem
@@ -200,9 +200,9 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
                 <h3 className="text-sm font-medium text-gray-700 mb-3">Struktura przychodów</h3>
                 <FinancialBar
                   segments={[
-                    { label: '1,5% podatku', value: org.revenue_15pct ?? 0, color: '#3b82f6' },
-                    { label: 'Publiczne (inne)', value: Math.max(0, (org.revenue_public_total ?? 0) - (org.revenue_15pct ?? 0)), color: '#60a5fa' },
-                    { label: 'Prywatne', value: org.revenue_private_total ?? 0, color: '#10b981' },
+                    { label: '1,5% podatku', value: org.revenue_15pct ?? 0, color: '#00b9fb' },
+                    { label: 'Publiczne (inne)', value: Math.max(0, (org.revenue_public_total ?? 0) - (org.revenue_15pct ?? 0)), color: '#00b9fb', opacity: 0.7 },
+                    { label: 'Prywatne', value: org.revenue_private_total ?? 0, color: '#00b9fb', opacity: 0.4 },
                     { label: 'Inne', value: org.revenue_other ?? 0, color: '#9ca3af' },
                   ]}
                 />
@@ -215,8 +215,8 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
                 <h3 className="text-sm font-medium text-gray-700 mb-3">Struktura kosztów</h3>
                 <FinancialBar
                   segments={[
-                    { label: 'Statutowe (misja)', value: org.rach_costs_statutory_curr ?? 0, color: '#3b82f6' },
-                    { label: 'Administracyjne', value: org.rach_costs_admin_curr ?? 0, color: '#f59e0b' },
+                    { label: 'Statutowe (misja)', value: org.rach_costs_statutory_curr ?? 0, color: '#00b9fb' },
+                    { label: 'Administracyjne', value: org.rach_costs_admin_curr ?? 0, color: '#00b9fb', opacity: 0.4 },
                   ]}
                 />
                 <p className="text-xs text-gray-500 mt-3">

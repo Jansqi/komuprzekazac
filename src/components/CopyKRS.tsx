@@ -14,7 +14,7 @@ export default function CopyKRS({ krs }: { krs: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-800 rounded-lg text-sm font-mono transition-colors"
+      className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#00b9fb]/10 hover:bg-[#00b9fb]/20 text-[#00b9fb] rounded-lg text-sm font-mono transition-colors"
       aria-label={`Skopiuj numer KRS ${krs}`}
     >
       KRS {krs}
