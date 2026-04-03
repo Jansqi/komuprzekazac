@@ -50,18 +50,12 @@ export function safePercent(part: number | null, total: number | null): number |
 }
 
 /**
- * Capitalize first letter
- */
-export function capitalize(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
-}
-
-/**
- * Format voivodeship name from UPPERCASE to Title Case
+ * Format UPPERCASE location name to Title Case, preserving original
+ * separators (spaces, hyphens, and combinations like " - ").
+ * Works for both voivodeships and cities.
  */
 export function formatVoivodeship(v: string): string {
-  return v
-    .split(/[\s-]+/)
-    .map(w => capitalize(w))
-    .join(v.includes('-') ? '-' : ' ');
+  return v.replace(/[A-Za-z\u00C0-\u024F]+/g, (word) =>
+    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+  );
 }
