@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Fuse from 'fuse.js';
 import { CATEGORIES, VOIVODESHIPS, SCOPE_LABELS, SIZE_LABELS } from '@/lib/constants';
@@ -9,16 +10,99 @@ import type { Organization, DataFile } from '@/types/organization';
 
 const PER_PAGE = 20;
 
-export default function SearchPage() {
+const PARAM_NAMES = {
+  query: 'szukaj',
+  category: 'kategoria',
+  voivodeship: 'wojewodztwo',
+  scope: 'zakres',
+  size: 'wielkosc',
+  page: 'strona',
+} as const;
+
+function SearchPageInner() {
+  const searchParams = useSearchParams();
+
   const [data, setData] = useState<Organization[]>([]);
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('');
-  const [voivodeship, setVoivodeship] = useState('');
-  const [scope, setScope] = useState('');
-  const [size, setSize] = useState('');
-  const [page, setPage] = useState(1);
+
+  // Initialize state from URL params
+  const [query, setQuery] = useState(searchParams.get(PARAM_NAMES.query) ?? '');
+  const [category, setCategory] = useState(searchParams.get(PARAM_NAMES.category) ?? '');
+  const [voivodeship, setVoivodeship] = useState(searchParams.get(PARAM_NAMES.voivodeship) ?? '');
+  const [scope, setScope] = useState(searchParams.get(PARAM_NAMES.scope) ?? '');
+  const [size, setSize] = useState(searchParams.get(PARAM_NAMES.size) ?? '');
+  const [page, setPage] = useState(() => {
+    const p = parseInt(searchParams.get(PARAM_NAMES.page) ?? '', 10);
+    return p > 0 ? p : 1;
+  });
   const [showFilters, setShowFilters] = useState(false);
+
+  // Debounced query for URL sync — the input updates `query` instantly,
+  // but URL only updates after the user stops typing.
+  const [debouncedQuery, setDebouncedQuery] = useState(query);
+  const debounceTimer = useRef<ReturnType<typeof setTimeout>>(null);
+
+  useEffect(() => {
+    debounceTimer.current = setTimeout(() => setDebouncedQuery(query), 300);
+    return () => { if (debounceTimer.current) clearTimeout(debounceTimer.current); };
+  }, [query]);
+
+  // Sync state → URL (replaceState so back button tracks meaningful changes)
+  const isInitialMount = useRef(true);
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    const params = new URLSearchParams();
+    if (debouncedQuery) params.set(PARAM_NAMES.query, debouncedQuery);
+    if (category) params.set(PARAM_NAMES.category, category);
+    if (voivodeship) params.set(PARAM_NAMES.voivodeship, voivodeship);
+    if (scope) params.set(PARAM_NAMES.scope, scope);
+    if (size) params.set(PARAM_NAMES.size, size);
+    if (page > 1) params.set(PARAM_NAMES.page, String(page));
+
+    const qs = params.toString();
+    const url = qs ? `/szukaj?${qs}` : '/szukaj';
+    window.history.replaceState(null, '', url);
+  }, [debouncedQuery, category, voivodeship, scope, size, page]);
+
+  // For dropdown/pagination changes, push a history entry so back button works
+  const pushUrl = useCallback((overrides: Partial<Record<string, string | number>>) => {
+    const state = { query, category, voivodeship, scope, size, page, ...overrides };
+    const params = new URLSearchParams();
+    if (state.query) params.set(PARAM_NAMES.query, String(state.query));
+    if (state.category) params.set(PARAM_NAMES.category, String(state.category));
+    if (state.voivodeship) params.set(PARAM_NAMES.voivodeship, String(state.voivodeship));
+    if (state.scope) params.set(PARAM_NAMES.scope, String(state.scope));
+    if (state.size) params.set(PARAM_NAMES.size, String(state.size));
+    if (Number(state.page) > 1) params.set(PARAM_NAMES.page, String(state.page));
+    const qs = params.toString();
+    window.history.pushState(null, '', qs ? `/szukaj?${qs}` : '/szukaj');
+  }, [query, category, voivodeship, scope, size, page]);
+
+  // Handle browser back/forward
+  useEffect(() => {
+    const onPopState = () => {
+      const p = new URLSearchParams(window.location.search);
+      setQuery(p.get(PARAM_NAMES.query) ?? '');
+      setDebouncedQuery(p.get(PARAM_NAMES.query) ?? '');
+      setCategory(p.get(PARAM_NAMES.category) ?? '');
+      setVoivodeship(p.get(PARAM_NAMES.voivodeship) ?? '');
+      setScope(p.get(PARAM_NAMES.scope) ?? '');
+      setSize(p.get(PARAM_NAMES.size) ?? '');
+      const pg = parseInt(p.get(PARAM_NAMES.page) ?? '', 10);
+      setPage(pg > 0 ? pg : 1);
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  // Filter change helpers — push history + update state
+  const updateCategory = useCallback((v: string) => { setCategory(v); setPage(1); pushUrl({ category: v, page: 1 }); }, [pushUrl]);
+  const updateVoivodeship = useCallback((v: string) => { setVoivodeship(v); setPage(1); pushUrl({ voivodeship: v, page: 1 }); }, [pushUrl]);
+  const updateScope = useCallback((v: string) => { setScope(v); setPage(1); pushUrl({ scope: v, page: 1 }); }, [pushUrl]);
+  const updateSize = useCallback((v: string) => { setSize(v); setPage(1); pushUrl({ size: v, page: 1 }); }, [pushUrl]);
 
   useEffect(() => {
     fetch('/data/organizations.json')
@@ -77,16 +161,23 @@ export default function SearchPage() {
 
   const resetFilters = useCallback(() => {
     setQuery('');
+    setDebouncedQuery('');
     setCategory('');
     setVoivodeship('');
     setScope('');
     setSize('');
     setPage(1);
+    window.history.pushState(null, '', '/szukaj');
   }, []);
 
+  // Reset page to 1 when query text changes (but not on initial mount)
+  const prevQuery = useRef(query);
   useEffect(() => {
-    setPage(1);
-  }, [query, category, voivodeship, scope, size]);
+    if (prevQuery.current !== query) {
+      prevQuery.current = query;
+      setPage(1);
+    }
+  }, [query]);
 
   if (loading) {
     return (
@@ -127,7 +218,7 @@ export default function SearchPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1">Kategoria</label>
               <select
                 value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => updateCategory(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
               >
                 <option value="">Wszystkie kategorie</option>
@@ -143,7 +234,7 @@ export default function SearchPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1">Województwo</label>
               <select
                 value={voivodeship}
-                onChange={(e) => setVoivodeship(e.target.value)}
+                onChange={(e) => updateVoivodeship(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
               >
                 <option value="">Wszystkie województwa</option>
@@ -161,7 +252,7 @@ export default function SearchPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1">Zasięg</label>
               <select
                 value={scope}
-                onChange={(e) => setScope(e.target.value)}
+                onChange={(e) => updateScope(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
               >
                 <option value="">Dowolny</option>
@@ -177,7 +268,7 @@ export default function SearchPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1">Rozmiar</label>
               <select
                 value={size}
-                onChange={(e) => setSize(e.target.value)}
+                onChange={(e) => updateSize(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
               >
                 <option value="">Dowolny</option>
@@ -245,7 +336,7 @@ export default function SearchPage() {
           {totalPages > 1 && (
             <div className="flex items-center justify-center gap-2 mt-8">
               <button
-                onClick={() => setPage(Math.max(1, page - 1))}
+                onClick={() => { const p = Math.max(1, page - 1); setPage(p); pushUrl({ page: p }); }}
                 disabled={page === 1}
                 className="px-3 py-2 text-sm border border-gray-300 rounded-lg disabled:opacity-30 hover:bg-gray-50"
               >
@@ -255,7 +346,7 @@ export default function SearchPage() {
                 {page} z {totalPages}
               </span>
               <button
-                onClick={() => setPage(Math.min(totalPages, page + 1))}
+                onClick={() => { const p = Math.min(totalPages, page + 1); setPage(p); pushUrl({ page: p }); }}
                 disabled={page === totalPages}
                 className="px-3 py-2 text-sm border border-gray-300 rounded-lg disabled:opacity-30 hover:bg-gray-50"
               >
@@ -266,5 +357,17 @@ export default function SearchPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <div className="max-w-6xl mx-auto px-4 py-16 text-center">
+        <p className="text-gray-500 text-lg">Ładowanie danych...</p>
+      </div>
+    }>
+      <SearchPageInner />
+    </Suspense>
   );
 }
