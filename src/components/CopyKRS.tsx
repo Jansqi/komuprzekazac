@@ -15,11 +15,11 @@ export default function CopyKRS({ krs }: { krs: string }) {
     <button
       onClick={handleCopy}
       className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-800 rounded-lg text-sm font-mono transition-colors"
-      title="Skopiuj numer KRS"
+      aria-label={`Skopiuj numer KRS ${krs}`}
     >
       KRS {krs}
-      <span className="text-xs ml-1">
-        {copied ? '✓ Skopiowano' : '📋'}
+      <span className="text-xs ml-1" aria-live="polite">
+        {copied ? '✓ Skopiowano' : <span aria-hidden="true">📋</span>}
       </span>
     </button>
   );

@@ -193,7 +193,9 @@ function SearchPageInner() {
 
       {/* Search bar */}
       <div className="mb-6">
+        <label htmlFor="search-input" className="sr-only">Szukaj organizacji</label>
         <input
+          id="search-input"
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -206,17 +208,20 @@ function SearchPageInner() {
       <button
         onClick={() => setShowFilters(!showFilters)}
         className="md:hidden mb-4 text-sm text-blue-600 hover:text-blue-800"
+        aria-expanded={showFilters}
+        aria-controls="search-filters"
       >
         {showFilters ? 'Ukryj filtry' : 'Pokaż filtry'} ▾
       </button>
 
       <div className="flex flex-col md:flex-row gap-6">
         {/* Filters */}
-        <aside className={`md:w-64 flex-shrink-0 ${showFilters ? 'block' : 'hidden md:block'}`}>
+        <aside id="search-filters" className={`md:w-64 flex-shrink-0 ${showFilters ? 'block' : 'hidden md:block'}`}>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Kategoria</label>
+              <label htmlFor="filter-category" className="block text-sm font-medium text-gray-700 mb-1">Kategoria</label>
               <select
+                id="filter-category"
                 value={category}
                 onChange={(e) => updateCategory(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
@@ -231,8 +236,9 @@ function SearchPageInner() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Województwo</label>
+              <label htmlFor="filter-voivodeship" className="block text-sm font-medium text-gray-700 mb-1">Województwo</label>
               <select
+                id="filter-voivodeship"
                 value={voivodeship}
                 onChange={(e) => updateVoivodeship(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
@@ -249,8 +255,9 @@ function SearchPageInner() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Zasięg</label>
+              <label htmlFor="filter-scope" className="block text-sm font-medium text-gray-700 mb-1">Zasięg</label>
               <select
+                id="filter-scope"
                 value={scope}
                 onChange={(e) => updateScope(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
@@ -265,8 +272,9 @@ function SearchPageInner() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Rozmiar</label>
+              <label htmlFor="filter-size" className="block text-sm font-medium text-gray-700 mb-1">Rozmiar</label>
               <select
+                id="filter-size"
                 value={size}
                 onChange={(e) => updateSize(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
@@ -334,11 +342,12 @@ function SearchPageInner() {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-8">
+            <nav className="flex items-center justify-center gap-2 mt-8" aria-label="Nawigacja między stronami wyników">
               <button
                 onClick={() => { const p = Math.max(1, page - 1); setPage(p); pushUrl({ page: p }); }}
                 disabled={page === 1}
                 className="px-3 py-2 text-sm border border-gray-300 rounded-lg disabled:opacity-30 hover:bg-gray-50"
+                aria-label="Poprzednia strona wyników"
               >
                 ← Poprzednia
               </button>
@@ -349,10 +358,11 @@ function SearchPageInner() {
                 onClick={() => { const p = Math.min(totalPages, page + 1); setPage(p); pushUrl({ page: p }); }}
                 disabled={page === totalPages}
                 className="px-3 py-2 text-sm border border-gray-300 rounded-lg disabled:opacity-30 hover:bg-gray-50"
+                aria-label="Następna strona wyników"
               >
                 Następna →
               </button>
-            </div>
+            </nav>
           )}
         </div>
       </div>

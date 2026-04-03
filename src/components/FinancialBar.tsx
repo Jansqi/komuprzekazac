@@ -10,9 +10,17 @@ export default function FinancialBar({ segments }: { segments: Segment[] }) {
   const total = segments.reduce((sum, s) => sum + Math.max(0, s.value), 0);
   if (total === 0) return null;
 
+  const description = segments
+    .map((s) => {
+      const pct = (Math.max(0, s.value) / total) * 100;
+      return pct >= 1 ? `${s.label}: ${Math.round(pct)}%` : null;
+    })
+    .filter(Boolean)
+    .join(', ');
+
   return (
     <div>
-      <div className="flex rounded-lg overflow-hidden h-8">
+      <div className="flex rounded-lg overflow-hidden h-8" role="img" aria-label={description}>
         {segments.map((s, i) => {
           const pct = (Math.max(0, s.value) / total) * 100;
           if (pct < 1) return null;
@@ -22,6 +30,7 @@ export default function FinancialBar({ segments }: { segments: Segment[] }) {
               className="flex items-center justify-center text-xs text-white font-medium"
               style={{ width: `${pct}%`, backgroundColor: s.color, minWidth: pct > 5 ? 'auto' : 0 }}
               title={`${s.label}: ${pct.toFixed(1)}%`}
+              aria-hidden="true"
             >
               {pct > 10 ? `${Math.round(pct)}%` : ''}
             </div>
