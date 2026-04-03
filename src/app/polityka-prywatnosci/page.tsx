@@ -40,10 +40,7 @@ export default function PrivacyPage() {
 
         <h2 className="text-xl font-semibold mt-8">Kontakt</h2>
         <p>
-          W sprawach związanych z prywatnością prosimy o kontakt:{' '}
-          <a href="mailto:janrogulski@gmail.com" className="text-[#00b9fb] hover:text-[#009dd4]">
-            janrogulski@gmail.com
-          </a>
+          W sprawach związanych z prywatnością prosimy o kontakt za pośrednictwem strony.
         </p>
 
         <p className="text-sm text-gray-400 mt-8">
