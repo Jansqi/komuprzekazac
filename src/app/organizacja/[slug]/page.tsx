@@ -57,11 +57,25 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
     },
   };
 
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://komuprzekazac.pl' },
+      { '@type': 'ListItem', position: 2, name: CATEGORIES[org.primary_category] || org.primary_category, item: `https://komuprzekazac.pl/kategoria/${org.primary_category}` },
+      { '@type': 'ListItem', position: 3, name: org.name, item: `https://komuprzekazac.pl/organizacja/${slug}` },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}

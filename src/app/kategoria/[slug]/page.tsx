@@ -33,16 +33,31 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const orgs = getOrganizationsByCategory(slug);
   const avg = getCategoryAverages()[slug];
 
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Strona główna', item: 'https://komuprzekazac.pl' },
+      { '@type': 'ListItem', position: 2, name: name, item: `https://komuprzekazac.pl/kategoria/${slug}` },
+    ],
+  };
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{name}</h1>
-      <p className="text-gray-600 mb-6">
-        {orgs.length.toLocaleString('pl-PL')} organizacji
-        {avg?.median_revenue && (
-          <> · mediana przychodów: {formatPLN(avg.median_revenue)}</>
-        )}
-      </p>
-      <OrgList organizations={orgs} />
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{name}</h1>
+        <p className="text-gray-600 mb-6">
+          {orgs.length.toLocaleString('pl-PL')} organizacji
+          {avg?.median_revenue && (
+            <> · mediana przychodów: {formatPLN(avg.median_revenue)}</>
+          )}
+        </p>
+        <OrgList organizations={orgs} />
+      </div>
+    </>
   );
 }

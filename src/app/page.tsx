@@ -36,12 +36,28 @@ export default function HomePage() {
   const categoryCounts = getCategoryCounts();
   const meta = getMeta();
 
+  const searchActionLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'KomuPrzekazac.pl',
+    url: 'https://komuprzekazac.pl',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://komuprzekazac.pl/szukaj?szukaj={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
   const sortedCategories = Object.entries(CATEGORIES).sort((a, b) => {
     return (categoryCounts[b[0]] || 0) - (categoryCounts[a[0]] || 0);
   });
 
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(searchActionLd) }}
+      />
       {/* Hero */}
       <section className="bg-gradient-to-b from-blue-50 to-white py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 text-center">
