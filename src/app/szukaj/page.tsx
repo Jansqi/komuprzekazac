@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useCallback, useRef, Suspense } from 'rea
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Fuse from 'fuse.js';
-import { CATEGORIES, VOIVODESHIPS, SCOPE_LABELS, SIZE_LABELS } from '@/lib/constants';
+import { CATEGORIES, VOIVODESHIPS, SCOPE_LABELS, SIZE_LABELS, BENEFICIARY_TAGS } from '@/lib/constants';
 import { formatPLN, formatVoivodeship } from '@/lib/format';
 import type { Organization, DataFile } from '@/types/organization';
 
@@ -16,6 +16,7 @@ const PARAM_NAMES = {
   voivodeship: 'wojewodztwo',
   scope: 'zakres',
   size: 'wielkosc',
+  beneficiary: 'grupa',
   page: 'strona',
 } as const;
 
@@ -31,6 +32,7 @@ function SearchPageInner() {
   const [voivodeship, setVoivodeship] = useState(searchParams.get(PARAM_NAMES.voivodeship) ?? '');
   const [scope, setScope] = useState(searchParams.get(PARAM_NAMES.scope) ?? '');
   const [size, setSize] = useState(searchParams.get(PARAM_NAMES.size) ?? '');
+  const [beneficiary, setBeneficiary] = useState(searchParams.get(PARAM_NAMES.beneficiary) ?? '');
   const [page, setPage] = useState(() => {
     const p = parseInt(searchParams.get(PARAM_NAMES.page) ?? '', 10);
     return p > 0 ? p : 1;
@@ -60,26 +62,28 @@ function SearchPageInner() {
     if (voivodeship) params.set(PARAM_NAMES.voivodeship, voivodeship);
     if (scope) params.set(PARAM_NAMES.scope, scope);
     if (size) params.set(PARAM_NAMES.size, size);
+    if (beneficiary) params.set(PARAM_NAMES.beneficiary, beneficiary);
     if (page > 1) params.set(PARAM_NAMES.page, String(page));
 
     const qs = params.toString();
     const url = qs ? `/szukaj?${qs}` : '/szukaj';
     window.history.replaceState(null, '', url);
-  }, [debouncedQuery, category, voivodeship, scope, size, page]);
+  }, [debouncedQuery, category, voivodeship, scope, size, beneficiary, page]);
 
   // For dropdown/pagination changes, push a history entry so back button works
   const pushUrl = useCallback((overrides: Partial<Record<string, string | number>>) => {
-    const state = { query, category, voivodeship, scope, size, page, ...overrides };
+    const state = { query, category, voivodeship, scope, size, beneficiary, page, ...overrides };
     const params = new URLSearchParams();
     if (state.query) params.set(PARAM_NAMES.query, String(state.query));
     if (state.category) params.set(PARAM_NAMES.category, String(state.category));
     if (state.voivodeship) params.set(PARAM_NAMES.voivodeship, String(state.voivodeship));
     if (state.scope) params.set(PARAM_NAMES.scope, String(state.scope));
     if (state.size) params.set(PARAM_NAMES.size, String(state.size));
+    if (state.beneficiary) params.set(PARAM_NAMES.beneficiary, String(state.beneficiary));
     if (Number(state.page) > 1) params.set(PARAM_NAMES.page, String(state.page));
     const qs = params.toString();
     window.history.pushState(null, '', qs ? `/szukaj?${qs}` : '/szukaj');
-  }, [query, category, voivodeship, scope, size, page]);
+  }, [query, category, voivodeship, scope, size, beneficiary, page]);
 
   // Handle browser back/forward
   useEffect(() => {
@@ -91,6 +95,7 @@ function SearchPageInner() {
       setVoivodeship(p.get(PARAM_NAMES.voivodeship) ?? '');
       setScope(p.get(PARAM_NAMES.scope) ?? '');
       setSize(p.get(PARAM_NAMES.size) ?? '');
+      setBeneficiary(p.get(PARAM_NAMES.beneficiary) ?? '');
       const pg = parseInt(p.get(PARAM_NAMES.page) ?? '', 10);
       setPage(pg > 0 ? pg : 1);
     };
@@ -103,6 +108,7 @@ function SearchPageInner() {
   const updateVoivodeship = useCallback((v: string) => { setVoivodeship(v); setPage(1); pushUrl({ voivodeship: v, page: 1 }); }, [pushUrl]);
   const updateScope = useCallback((v: string) => { setScope(v); setPage(1); pushUrl({ scope: v, page: 1 }); }, [pushUrl]);
   const updateSize = useCallback((v: string) => { setSize(v); setPage(1); pushUrl({ size: v, page: 1 }); }, [pushUrl]);
+  const updateBeneficiary = useCallback((v: string) => { setBeneficiary(v); setPage(1); pushUrl({ beneficiary: v, page: 1 }); }, [pushUrl]);
 
   useEffect(() => {
     fetch('/data/organizations.json')
@@ -152,9 +158,12 @@ function SearchPageInner() {
     if (size) {
       results = results.filter((o) => o.size === size);
     }
+    if (beneficiary) {
+      results = results.filter((o) => o.beneficiary_tags.includes(beneficiary));
+    }
 
     return results;
-  }, [query, category, voivodeship, scope, size, data, fuse]);
+  }, [query, category, voivodeship, scope, size, beneficiary, data, fuse]);
 
   const totalPages = Math.ceil(filteredResults.length / PER_PAGE);
   const pageResults = filteredResults.slice((page - 1) * PER_PAGE, page * PER_PAGE);
@@ -166,6 +175,7 @@ function SearchPageInner() {
     setVoivodeship('');
     setScope('');
     setSize('');
+    setBeneficiary('');
     setPage(1);
     window.history.pushState(null, '', '/szukaj');
   }, []);
@@ -281,6 +291,23 @@ function SearchPageInner() {
               >
                 <option value="">Dowolny</option>
                 {Object.entries(SIZE_LABELS).map(([slug, name]) => (
+                  <option key={slug} value={slug}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="filter-beneficiary" className="block text-sm font-medium text-gray-700 mb-1">Grupa docelowa</label>
+              <select
+                id="filter-beneficiary"
+                value={beneficiary}
+                onChange={(e) => updateBeneficiary(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+              >
+                <option value="">Dowolna</option>
+                {Object.entries(BENEFICIARY_TAGS).map(([slug, name]) => (
                   <option key={slug} value={slug}>
                     {name}
                   </option>
