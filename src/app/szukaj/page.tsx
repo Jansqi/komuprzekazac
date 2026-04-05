@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Fuse from 'fuse.js';
 import { CATEGORIES, VOIVODESHIPS, SCOPE_LABELS, SIZE_LABELS, BENEFICIARY_TAGS } from '@/lib/constants';
-import { formatPLN, formatVoivodeship } from '@/lib/format';
+import { formatVoivodeship } from '@/lib/format';
 import type { Organization, DataFile } from '@/types/organization';
 
 const PER_PAGE = 20;
@@ -356,10 +356,10 @@ function SearchPageInner() {
                       )}
                     </div>
                   </div>
-                  {org.revenue_total !== null && (
+                  {org.size && (
                     <div className="text-right flex-shrink-0">
-                      <p className="text-sm text-gray-500">Przychody</p>
-                      <p className="font-semibold text-gray-900">{formatPLN(org.revenue_total)}</p>
+                      <p className="text-sm text-gray-500">Rozmiar</p>
+                      <p className="font-semibold text-gray-900">{SIZE_LABELS[org.size] || org.size}</p>
                     </div>
                   )}
                 </div>
