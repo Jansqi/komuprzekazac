@@ -83,8 +83,8 @@ export const SCOPE_LABELS: Record<string, string> = {
 
 export const SIZE_LABELS: Record<string, string> = {
   'mikro': 'Mikro (<10 tys. zł)',
-  'mala': 'Mała (10–100 tys. zł)',
-  'srednia': 'Średnia (100 tys.–1 mln zł)',
-  'duza': 'Duża (1–10 mln zł)',
-  'bardzo-duza': 'Bardzo duża (>10 mln zł)',
+  'mała': 'Mała (10–100 tys. zł)',
+  'średnia': 'Średnia (100 tys.–1 mln zł)',
+  'duża': 'Duża (1–10 mln zł)',
+  'bardzo-duża': 'Bardzo duża (>10 mln zł)',
 };
