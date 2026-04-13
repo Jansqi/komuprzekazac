@@ -7,6 +7,7 @@ import Link from 'next/link';
 import type { Organization } from '@/types/organization';
 import { CATEGORIES } from '@/lib/constants';
 import { formatVoivodeship } from '@/lib/format';
+import ExternalLink from '@/components/ExternalLink';
 
 import 'leaflet/dist/leaflet.css';
 
@@ -84,12 +85,22 @@ export default function MapView({ organizations }: MapViewProps) {
                   {formatVoivodeship(org.city)}, woj.{' '}
                   {formatVoivodeship(org.voivodeship)}
                 </p>
-                <Link
-                  href={`/organizacja/${org.slug}`}
-                  className="text-[#00b9fb] hover:text-[#009dd4] text-xs font-medium"
-                >
-                  Zobacz profil &rarr;
-                </Link>
+                <div className="flex flex-wrap gap-x-3 gap-y-1">
+                  <Link
+                    href={`/organizacja/${org.slug}`}
+                    className="text-[#00b9fb] hover:text-[#009dd4] text-xs font-medium"
+                  >
+                    Zobacz profil &rarr;
+                  </Link>
+                  {org.website && (
+                    <ExternalLink
+                      href={org.website}
+                      className="text-[#00b9fb] hover:text-[#009dd4] text-xs font-medium"
+                    >
+                      Strona WWW &nearr;
+                    </ExternalLink>
+                  )}
+                </div>
               </div>
             </Popup>
           </Marker>
