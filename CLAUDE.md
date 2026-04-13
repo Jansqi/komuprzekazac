@@ -13,7 +13,7 @@ Polish civic transparency platform — helps taxpayers choose which OPP (public 
 - Fuse.js for client-side fuzzy search
 - TypeScript throughout
 - Data: single static JSON (`public/data/organizations.json`, ~12 MB)
-- Deploy: Cloudflare Pages
+- Deploy: Vercel (Hobby plan, auto-deploy z branch main, projekt komuprzekazac)
 - UI text in Polish, code/comments in English
 
 ## Commands
