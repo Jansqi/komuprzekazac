@@ -7,7 +7,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "KomuPrzekazac.pl — Sprawdź organizacje pożytku publicznego",
+    default: "KomuPrzekazac.pl - Sprawdź organizacje pożytku publicznego",
     template: "%s | KomuPrzekazac.pl",
   },
   description:
@@ -75,7 +75,7 @@ export default function RootLayout({
         <footer className="bg-[#00b9fb] mt-12">
           <div className="max-w-6xl mx-auto px-4 py-8 text-sm text-white">
             <p>
-              KomuPrzekazac.pl — niezależny serwis informacyjny. Dane ze sprawozdań OPP za rok 2024,
+              KomuPrzekazac.pl - niezależny serwis informacyjny. Dane ze sprawozdań OPP za rok 2024,
               złożonych w NIW-CRSO. Serwis nie ocenia ani nie rankinguje organizacji.
             </p>
             <div className="mt-2 flex flex-wrap gap-4 items-center">

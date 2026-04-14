@@ -8,7 +8,7 @@ import OrgMap from '@/components/OrgMap';
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
   openGraph: {
-    title: 'KomuPrzekazac.pl — Wybierz świadomie, komu przekazujesz 1,5%',
+    title: 'KomuPrzekazac.pl - Wybierz świadomie, komu przekazujesz 1,5%',
     description:
       'Przeglądaj 9 671 organizacji pożytku publicznego na mapie Polski. Znajdź organizację w swojej okolicy, porównaj dane finansowe i sygnały transparentności.',
   },

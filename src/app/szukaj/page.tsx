@@ -39,7 +39,7 @@ function SearchPageInner() {
   });
   const [showFilters, setShowFilters] = useState(false);
 
-  // Debounced query for URL sync — the input updates `query` instantly,
+  // Debounced query for URL sync - the input updates `query` instantly,
   // but URL only updates after the user stops typing.
   const [debouncedQuery, setDebouncedQuery] = useState(query);
   const debounceTimer = useRef<ReturnType<typeof setTimeout>>(null);
@@ -103,7 +103,7 @@ function SearchPageInner() {
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
-  // Filter change helpers — push history + update state
+  // Filter change helpers - push history + update state
   const updateCategory = useCallback((v: string) => { setCategory(v); setPage(1); pushUrl({ category: v, page: 1 }); }, [pushUrl]);
   const updateVoivodeship = useCallback((v: string) => { setVoivodeship(v); setPage(1); pushUrl({ voivodeship: v, page: 1 }); }, [pushUrl]);
   const updateScope = useCallback((v: string) => { setScope(v); setPage(1); pushUrl({ scope: v, page: 1 }); }, [pushUrl]);

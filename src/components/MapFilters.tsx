@@ -50,7 +50,7 @@ export default function MapFilters({
   const categoryEntries = sortedByPolishName(CATEGORIES);
   const beneficiaryEntries = sortedByPolishName(BENEFICIARY_TAGS);
   const scopeEntries = sortedByPolishName(SCOPE_LABELS);
-  // Size is an ordinal scale — keep original (mikro → bardzo-duża) order
+  // Size is an ordinal scale - keep original (mikro → bardzo-duża) order
   const sizeEntries = Object.entries(SIZE_LABELS);
 
   return (
@@ -104,7 +104,7 @@ export default function MapFilters({
             </button>
           )}
 
-          {/* Categories — collapsible (18 items) */}
+          {/* Categories - collapsible (18 items) */}
           <details
             className="mb-2 border-t border-gray-100 pt-3"
             open={categories.length > 0}
@@ -138,7 +138,7 @@ export default function MapFilters({
             </div>
           </details>
 
-          {/* Beneficiaries — collapsible (14 items) */}
+          {/* Beneficiaries - collapsible (14 items) */}
           <details
             className="mb-2 border-t border-gray-100 pt-3"
             open={beneficiaries.length > 0}
@@ -174,7 +174,7 @@ export default function MapFilters({
             </div>
           </details>
 
-          {/* Scope — always expanded (4 items) */}
+          {/* Scope - always expanded (4 items) */}
           <div className="mb-3 border-t border-gray-100 pt-3">
             <p className="font-medium text-sm text-gray-800 mb-2">
               Zasięg{' '}
@@ -200,7 +200,7 @@ export default function MapFilters({
             </div>
           </div>
 
-          {/* Size — always expanded (5 items), ordinal order preserved */}
+          {/* Size - always expanded (5 items), ordinal order preserved */}
           <div className="mb-3 border-t border-gray-100 pt-3">
             <p className="font-medium text-sm text-gray-800 mb-2">
               Wielkość{' '}

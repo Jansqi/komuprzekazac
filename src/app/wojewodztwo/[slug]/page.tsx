@@ -16,10 +16,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const description = `Lista organizacji pożytku publicznego w województwie ${name.toLowerCase()}.`;
   return {
     alternates: { canonical: `/wojewodztwo/${slug}` },
-    title: `Organizacje OPP — woj. ${name}`,
+    title: `Organizacje OPP - woj. ${name}`,
     description,
     openGraph: {
-      title: `Organizacje OPP — woj. ${name} | KomuPrzekazac.pl`,
+      title: `Organizacje OPP - woj. ${name} | KomuPrzekazac.pl`,
       description,
     },
   };
