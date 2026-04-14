@@ -27,9 +27,9 @@ interface Props {
   variant: Variant;
   /** Override default source label (e.g. 'footer' for the footer link). */
   source?: SourceButton;
-  /** Required for variant="data" — passed as Tally hidden field. */
+  /** Required for variant="data" - passed as Tally hidden field. */
   krs?: string;
-  /** Required for variant="data" — passed as Tally hidden field. */
+  /** Required for variant="data" - passed as Tally hidden field. */
   orgName?: string;
   className?: string;
   children?: React.ReactNode;
@@ -55,7 +55,7 @@ export default function ReportBugButton({
   const handleClick = () => {
     if (typeof window === 'undefined') return;
     if (!window.Tally) {
-      // Embed script not yet loaded — fail gracefully.
+      // Embed script not yet loaded - fail gracefully.
       console.warn('[ReportBugButton] Tally embed not loaded yet');
       return;
     }

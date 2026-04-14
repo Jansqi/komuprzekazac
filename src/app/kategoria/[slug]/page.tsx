@@ -16,10 +16,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const description = `Lista organizacji pożytku publicznego w kategorii ${name}. Dane finansowe, opisy, sygnały transparentności.`;
   return {
     alternates: { canonical: `/kategoria/${slug}` },
-    title: `${name} — organizacje pożytku publicznego`,
+    title: `${name} - organizacje pożytku publicznego`,
     description,
     openGraph: {
-      title: `${name} — organizacje OPP | KomuPrzekazac.pl`,
+      title: `${name} - organizacje OPP | KomuPrzekazac.pl`,
       description,
     },
   };

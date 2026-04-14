@@ -26,7 +26,7 @@ export default function NiwLink({ krs }: { krs: string }) {
           role="status"
           className="absolute left-0 top-full mt-1 whitespace-nowrap bg-gray-900 text-white text-xs rounded-lg px-3 py-1.5 shadow-lg z-10"
         >
-          Skopiowano KRS do schowka — wklej w wyszukiwarce NIW
+          Skopiowano KRS do schowka - wklej w wyszukiwarce NIW
         </span>
       )}
     </span>

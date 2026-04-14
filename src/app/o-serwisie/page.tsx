@@ -4,10 +4,10 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   alternates: { canonical: '/o-serwisie' },
   title: 'O serwisie',
-  description: 'KomuPrzekazac.pl — niezależny serwis informacyjny o organizacjach pożytku publicznego.',
+  description: 'KomuPrzekazac.pl - niezależny serwis informacyjny o organizacjach pożytku publicznego.',
   openGraph: {
     title: 'O serwisie | KomuPrzekazac.pl',
-    description: 'KomuPrzekazac.pl — niezależny serwis informacyjny o organizacjach pożytku publicznego.',
+    description: 'KomuPrzekazac.pl - niezależny serwis informacyjny o organizacjach pożytku publicznego.',
   },
 };
 
@@ -26,20 +26,20 @@ export default function AboutPage() {
         <h2 className="text-xl font-semibold mt-8">Skąd pochodzą dane?</h2>
         <p>
           Prezentujemy dane z oficjalnych sprawozdań merytorycznych i finansowych za rok 2024,
-          złożonych przez organizacje w Narodowym Instytucie Wolności — Centrum Rozwoju Społeczeństwa
+          złożonych przez organizacje w Narodowym Instytucie Wolności - Centrum Rozwoju Społeczeństwa
           Obywatelskiego (NIW-CRSO). Dodatkowo wzbogacamy je o dane z Krajowego Rejestru Sądowego (KRS).
         </p>
         <p>
           Opisy organizacji zostały wygenerowane przez sztuczną inteligencję na podstawie celów
           statutowych i opisów działalności z oficjalnych dokumentów. Służą one wyłącznie jako
-          przystępne streszczenie — zachęcamy do weryfikacji na stronach organizacji i w eKRS.
+          przystępne streszczenie - zachęcamy do weryfikacji na stronach organizacji i w eKRS.
         </p>
 
         <h2 className="text-xl font-semibold mt-8">Dlaczego nie oceniamy?</h2>
         <p>
           Świadomie nie stosujemy scoringu, rankingów ani ocen punktowych. Każda arbitralna formuła
           oceny faworyzuje jedne organizacje kosztem innych, a badania pokazują, że scoring prowadzi
-          do manipulacji danymi. Zamiast tego prezentujemy fakty i sygnały transparentności — decyzja
+          do manipulacji danymi. Zamiast tego prezentujemy fakty i sygnały transparentności - decyzja
           należy do Ciebie.
         </p>
         <p>

@@ -20,7 +20,7 @@ export default function WhyNoRatingPage() {
       <div className="prose prose-gray max-w-none space-y-4">
         <p>
           Wiele serwisów porównujących organizacje pozarządowe stosuje systemy punktowe, gwiazdki
-          lub rankingi. My tego nie robimy — i to jest świadoma decyzja, nie brak funkcjonalności.
+          lub rankingi. My tego nie robimy - i to jest świadoma decyzja, nie brak funkcjonalności.
         </p>
 
         <h2 className="text-xl font-semibold mt-8">Problem z scoringiem</h2>
@@ -33,27 +33,27 @@ export default function WhyNoRatingPage() {
 
         <h2 className="text-xl font-semibold mt-8">Mit kosztów administracyjnych</h2>
         <p>
-          W 2013 roku trzy największe amerykańskie organizacje ewaluujące nonprofity — BBB Wise Giving
-          Alliance, Charity Navigator i GuideStar — opublikowały wspólny list otwarty &quot;The Overhead
+          W 2013 roku trzy największe amerykańskie organizacje ewaluujące nonprofity - BBB Wise Giving
+          Alliance, Charity Navigator i GuideStar - opublikowały wspólny list otwarty &quot;The Overhead
           Myth&quot;, w którym przyznały, że ocenianie organizacji na podstawie stosunku kosztów
           administracyjnych do kosztów ogólnych jest mylące i szkodliwe.
         </p>
         <p>
           Hospicjum potrzebuje lekarzy. Szkoła potrzebuje nauczycieli. Organizacja ratownicza
-          potrzebuje sprzętu i szkoleń. Niskie koszty administracyjne nie oznaczają efektywności —
+          potrzebuje sprzętu i szkoleń. Niskie koszty administracyjne nie oznaczają efektywności -
           często oznaczają niedoinwestowanie.
         </p>
 
         <h2 className="text-xl font-semibold mt-8">Co robimy zamiast tego</h2>
         <p>
           Prezentujemy dane finansowe <strong>zawsze z kontekstem</strong>: na tle średniej w danej
-          kategorii tematycznej. Pokazujemy sygnały transparentności — czy organizacja ma stronę WWW,
+          kategorii tematycznej. Pokazujemy sygnały transparentności - czy organizacja ma stronę WWW,
           email kontaktowy, czy złożyła pełne sprawozdanie, jak długo ma status OPP. To fakty,
           nie wyroki.
         </p>
         <p>
           Podatnik wspierający lokalny klub sportowy ma inne kryteria niż wspierający fundację
-          onkologiczną — i oba wybory są równie ważne. Naszą rolą jest dostarczyć informacje,
+          onkologiczną - i oba wybory są równie ważne. Naszą rolą jest dostarczyć informacje,
           nie narzucać ocenę.
         </p>
       </div>
