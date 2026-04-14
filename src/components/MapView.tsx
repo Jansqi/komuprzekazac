@@ -92,14 +92,14 @@ export default function MapView({ organizations }: MapViewProps) {
                     href={`/organizacja/${org.slug}`}
                     className="text-[#00b9fb] hover:text-[#009dd4] text-xs font-medium"
                   >
-                    Zobacz profil &rarr;
+                    Zobacz profil →
                   </Link>
                   {org.website && (
                     <ExternalLink
                       href={org.website}
                       className="text-[#00b9fb] hover:text-[#009dd4] text-xs font-medium"
                     >
-                      Strona WWW &nearr;
+                      Strona WWW ↗
                     </ExternalLink>
                   )}
                 </div>
