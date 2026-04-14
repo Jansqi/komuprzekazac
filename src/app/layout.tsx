@@ -60,7 +60,7 @@ export default function RootLayout({
               <Link href="/szukaj" className="text-gray-600 hover:text-[#00b9fb]">
                 Szukaj
               </Link>
-              <Link href="/mapa" className="text-gray-600 hover:text-[#00b9fb]">
+              <Link href="/#mapa" className="text-gray-600 hover:text-[#00b9fb]">
                 Mapa
               </Link>
               <Link href="/o-serwisie" className="text-gray-600 hover:text-[#00b9fb]">
