@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     title: 'KomuPrzekazac.pl - Wybierz świadomie, komu przekazujesz 1,5%',
     description:
       'Przeglądaj 9 671 organizacji pożytku publicznego na mapie Polski. Znajdź organizację w swojej okolicy, porównaj dane finansowe i sygnały transparentności.',
+    url: 'https://komuprzekazac.pl',
   },
 };
 

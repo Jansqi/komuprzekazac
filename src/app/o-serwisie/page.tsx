@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'O serwisie | KomuPrzekazac.pl',
     description: 'KomuPrzekazac.pl - niezależny serwis informacyjny o organizacjach pożytku publicznego.',
+    url: 'https://komuprzekazac.pl/o-serwisie',
   },
 };
 

@@ -48,18 +48,17 @@ Key: financial data always shown WITH category context. Never show "admin costs:
 - KRS number: 10-digit zero-padded, must be copy-able with one click
 - Email behind "pokaż" button (spam protection)
 
-## Known bugs (as of 2026-04-03)
+## SEO
 
-1. **Badge CSS classes undefined** — `badge`, `badge-primary`, `badge-secondary` used across OrgList, search results, org profiles, but never defined in globals.css or any Tailwind config. No DaisyUI installed. These elements render unstyled.
-2. **Search URL state not persisted** — /szukaj uses only useState for query + filters + pagination. Refresh = reset. Can't share filtered URLs. Needs useSearchParams() sync.
+- Sitemap: `src/app/sitemap.ts` — generates ~9 673 URLs (home, /szukaj, 3 static pages, 18 categories, 16 voivodeships, ~9 671 organizations). Runs automatically on `next build`.
+- Canonicals: every page sets `alternates.canonical`.
+- OG + Twitter card + verification meta tags are in root layout `src/app/layout.tsx`. OG image is `public/og-default.png` (1200×630), regenerable via `npm run og-image`.
+- Structured data: `WebSite` + `SearchAction` on home, `BreadcrumbList` on /kategoria and /wojewodztwo, `NGO` + `BreadcrumbList` on organization profiles.
+- Custom 404: `src/app/not-found.tsx`.
 
 ## Known missing features
 
-- Voivodeship pages: no category breakdown (spec requires it)
-- OG tags: only on /organizacja/[slug], missing on category/voivodeship/static pages
-- No canonical tags on any page
-- No ARIA/accessibility attributes on interactive elements
-- Schema.org JSON-LD only on org profiles (no BreadcrumbList, no SearchAction)
+- No ARIA/accessibility attributes on interactive elements (only sporadic `aria-label`/`aria-expanded` on /szukaj)
 
 ## Design rules
 

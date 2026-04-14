@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${org.name} | KomuPrzekazac.pl`,
       description: org.ai_summary,
+      url: `https://komuprzekazac.pl/organizacja/${slug}`,
     },
   };
 }

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Szukaj organizacji | KomuPrzekazac.pl',
     description: 'Wyszukaj wśród 9 671 organizacji pożytku publicznego. Filtruj po kategorii, województwie, zasięgu i rozmiarze.',
+    url: 'https://komuprzekazac.pl/szukaj',
   },
 };
 
