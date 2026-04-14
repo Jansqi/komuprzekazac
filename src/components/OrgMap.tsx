@@ -6,7 +6,6 @@ import {
   useMemo,
   useCallback,
   useRef,
-  Suspense,
 } from 'react';
 import { useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
@@ -28,7 +27,14 @@ function parseList(v: string | null): string[] {
   return v.split(',').filter(Boolean);
 }
 
-function MapaPageInner() {
+interface Props {
+  /** Base path used when syncing filter state to the URL. Defaults to "/". */
+  basePath?: string;
+  /** Optional heading rendered above the map (counter). When false, no heading is shown. */
+  showHeading?: boolean;
+}
+
+export default function OrgMap({ basePath = '/', showHeading = true }: Props) {
   const searchParams = useSearchParams();
   const [data, setData] = useState<DataFile | null>(null);
 
@@ -73,8 +79,8 @@ function MapaPageInner() {
     if (hasWebsite) params.set(PARAM.website, 'tak');
 
     const qs = params.toString();
-    window.history.replaceState(null, '', qs ? `/mapa?${qs}` : '/mapa');
-  }, [categories, beneficiaries, scopes, sizes, hasWebsite]);
+    window.history.replaceState(null, '', qs ? `${basePath}?${qs}` : basePath);
+  }, [categories, beneficiaries, scopes, sizes, hasWebsite, basePath]);
 
   // Handle browser back/forward
   useEffect(() => {
@@ -150,45 +156,45 @@ function MapaPageInner() {
     setScopes([]);
     setSizes([]);
     setHasWebsite(false);
-    window.history.pushState(null, '', '/mapa');
-  }, []);
+    window.history.pushState(null, '', basePath);
+  }, [basePath]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
-      <div className="flex items-start justify-between gap-4 mb-4">
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-            Mapa organizacji
-          </h1>
-          <p className="text-sm text-gray-500 mt-1">
+    <div className="max-w-7xl mx-auto px-4">
+      {showHeading && (
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <p className="text-sm text-gray-500">
             {data
               ? `${visibleCount.toLocaleString('pl-PL')} z ${totalGeocodedCount.toLocaleString(
                   'pl-PL'
                 )} organizacji pożytku publicznego na mapie Polski.`
               : 'Ładowanie danych…'}
           </p>
+          <button
+            onClick={() => setFiltersOpen(true)}
+            className="md:hidden flex-shrink-0 px-3 py-2 text-sm bg-[#00b9fb] text-white rounded-lg font-medium"
+            aria-controls="map-filters"
+            aria-expanded={filtersOpen}
+          >
+            Filtry {hasActive && <span aria-hidden="true">•</span>}
+            {hasActive && <span className="sr-only">(aktywne)</span>}
+          </button>
         </div>
-        <button
-          onClick={() => setFiltersOpen(true)}
-          className="md:hidden flex-shrink-0 px-3 py-2 text-sm bg-[#00b9fb] text-white rounded-lg font-medium"
-          aria-controls="map-filters"
-          aria-expanded={filtersOpen}
-        >
-          Filtry {hasActive && <span aria-hidden="true">•</span>}
-          {hasActive && <span className="sr-only">(aktywne)</span>}
-        </button>
-      </div>
+      )}
 
       <div className="flex flex-col md:flex-row gap-4">
-        <div
-          className="flex-1 min-w-0 rounded-xl border border-gray-200 overflow-hidden"
-          style={{ height: '70vh' }}
-        >
+        <div className="flex-1 min-w-0 rounded-xl border border-gray-200 overflow-hidden h-[50vh] md:h-[70vh]">
           {data ? (
             <MapView organizations={filtered} />
           ) : (
-            <div className="h-full flex items-center justify-center text-gray-400">
-              Ładowanie mapy…
+            <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-sky-50 to-white">
+              <div className="flex flex-col items-center gap-3 text-gray-400">
+                <div
+                  className="w-10 h-10 border-4 border-gray-200 border-t-[#00b9fb] rounded-full animate-spin"
+                  aria-hidden="true"
+                />
+                <p className="text-sm">Ładowanie mapy…</p>
+              </div>
             </div>
           )}
         </div>
@@ -213,19 +219,5 @@ function MapaPageInner() {
         />
       </div>
     </div>
-  );
-}
-
-export default function MapaPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="max-w-7xl mx-auto px-4 py-16 text-center">
-          <p className="text-gray-500 text-lg">Ładowanie danych…</p>
-        </div>
-      }
-    >
-      <MapaPageInner />
-    </Suspense>
   );
 }
