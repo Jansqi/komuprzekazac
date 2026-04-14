@@ -7,6 +7,7 @@ import { formatPLN, formatPercent, safePercent, formatNumber, formatVoivodeship 
 import CopyKRS from '@/components/CopyKRS';
 import ShowEmail from '@/components/ShowEmail';
 import FinancialBar from '@/components/FinancialBar';
+import ExternalLink from '@/components/ExternalLink';
 
 export async function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -116,24 +117,20 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
         {/* Links */}
         <div className="flex flex-wrap gap-4 mb-8 text-sm">
           {org.website && (
-            <a
+            <ExternalLink
               href={org.website}
-              target="_blank"
-              rel="noopener noreferrer"
               className="text-[#00b9fb] hover:text-[#009dd4] underline"
             >
               🌐 Strona WWW
-            </a>
+            </ExternalLink>
           )}
           {org.email && <ShowEmail email={org.email} />}
-          <a
-            href={`https://ekrs.ms.gov.pl/web/wyszukiwarka-krs/strona-glowna/index.html`}
-            target="_blank"
-            rel="noopener noreferrer"
+          <ExternalLink
+            href="https://ekrs.ms.gov.pl/web/wyszukiwarka-krs/strona-glowna/index.html"
             className="text-[#00b9fb] hover:text-[#009dd4] underline"
           >
             📋 Sprawdź w eKRS
-          </a>
+          </ExternalLink>
         </div>
 
         {/* Transparency signals */}
@@ -293,14 +290,12 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
         {/* Source note */}
         <div className="text-xs text-gray-400 border-t border-gray-100 pt-4 mt-8">
           Dane ze sprawozdania za rok {org.report_year}, złożonego w NIW-CRSO.{' '}
-          <a
+          <ExternalLink
             href="https://ekrs.ms.gov.pl/web/wyszukiwarka-krs/strona-glowna/index.html"
-            target="_blank"
-            rel="noopener noreferrer"
             className="underline"
           >
             Sprawdź w eKRS
-          </a>
+          </ExternalLink>
         </div>
       </div>
     </>

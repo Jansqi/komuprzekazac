@@ -44,6 +44,9 @@ export interface Organization {
   opp_years: number | null;
 
   size: string | null;
+
+  lat: number | null;
+  lng: number | null;
 }
 
 export interface CategoryAverage {
