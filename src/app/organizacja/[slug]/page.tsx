@@ -9,6 +9,7 @@ import ShowEmail from '@/components/ShowEmail';
 import FinancialBar from '@/components/FinancialBar';
 import ExternalLink from '@/components/ExternalLink';
 import NiwLink from '@/components/NiwLink';
+import ReportBugButton from '@/components/ReportBugButton';
 
 export async function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -290,14 +291,21 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
         )}
 
         {/* Source note */}
-        <div className="text-xs text-gray-400 border-t border-gray-100 pt-4 mt-8">
-          Dane ze sprawozdania za rok {org.report_year}, złożonego w NIW-CRSO.{' '}
-          <ExternalLink
-            href="https://ekrs.ms.gov.pl/web/wyszukiwarka-krs/strona-glowna/index.html"
-            className="underline"
-          >
-            Sprawdź w eKRS
-          </ExternalLink>
+        <div className="text-xs text-gray-400 border-t border-gray-100 pt-4 mt-8 flex flex-wrap items-center justify-between gap-3">
+          <span>
+            Dane ze sprawozdania za rok {org.report_year}, złożonego w NIW-CRSO.{' '}
+            <ExternalLink
+              href="https://ekrs.ms.gov.pl/web/wyszukiwarka-krs/strona-glowna/index.html"
+              className="underline"
+            >
+              Sprawdź w eKRS
+            </ExternalLink>
+          </span>
+          <ReportBugButton
+            variant="data"
+            krs={org.krs_number}
+            orgName={org.name}
+          />
         </div>
       </div>
     </>

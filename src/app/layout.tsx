@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
+import ReportBugButton from "@/components/ReportBugButton";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -76,13 +78,19 @@ export default function RootLayout({
               KomuPrzekazac.pl — niezależny serwis informacyjny. Dane ze sprawozdań OPP za rok 2024,
               złożonych w NIW-CRSO. Serwis nie ocenia ani nie rankinguje organizacji.
             </p>
-            <div className="mt-2 flex gap-4">
+            <div className="mt-2 flex flex-wrap gap-4 items-center">
               <Link href="/o-serwisie" className="hover:text-white/80">O serwisie</Link>
               <Link href="/dlaczego-nie-oceniamy" className="hover:text-white/80">Dlaczego nie oceniamy</Link>
               <Link href="/polityka-prywatnosci" className="hover:text-white/80">Polityka prywatności</Link>
+              <ReportBugButton variant="website" source="footer" />
             </div>
           </div>
         </footer>
+        <Script
+          id="tally-embed"
+          src="https://tally.so/widgets/embed.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
