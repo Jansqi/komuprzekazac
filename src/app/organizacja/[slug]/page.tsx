@@ -8,6 +8,7 @@ import CopyKRS from '@/components/CopyKRS';
 import ShowEmail from '@/components/ShowEmail';
 import FinancialBar from '@/components/FinancialBar';
 import ExternalLink from '@/components/ExternalLink';
+import NiwLink from '@/components/NiwLink';
 
 export async function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -131,6 +132,7 @@ export default async function OrganizationPage({ params }: { params: Promise<{ s
           >
             📋 Sprawdź w eKRS
           </ExternalLink>
+          <NiwLink krs={org.krs_number} />
         </div>
 
         {/* Transparency signals */}
