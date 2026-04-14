@@ -5,18 +5,35 @@ import Script from "next/script";
 import ReportBugButton from "@/components/ReportBugButton";
 import "./globals.css";
 
+const SITE_DESCRIPTION =
+  "Porównaj 9 671 organizacji pożytku publicznego. Dane finansowe, opisy działalności, sygnały transparentności. Wybierz świadomie, komu przekazać 1,5% podatku.";
+
 export const metadata: Metadata = {
   title: {
     default: "KomuPrzekazac.pl - Sprawdź organizacje pożytku publicznego",
     template: "%s | KomuPrzekazac.pl",
   },
-  description:
-    "Porównaj 9 671 organizacji pożytku publicznego. Dane finansowe, opisy działalności, sygnały transparentności. Wybierz świadomie, komu przekazać 1,5% podatku.",
+  description: SITE_DESCRIPTION,
   metadataBase: new URL("https://komuprzekazac.pl"),
   openGraph: {
     siteName: "KomuPrzekazac.pl",
     locale: "pl_PL",
     type: "website",
+    url: "https://komuprzekazac.pl",
+    images: [
+      {
+        url: "/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "KomuPrzekazac.pl — porównaj organizacje pożytku publicznego",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KomuPrzekazac.pl",
+    description: SITE_DESCRIPTION,
+    images: ["/og-default.png"],
   },
   icons: {
     icon: [
@@ -27,6 +44,12 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
+  // TODO: Jan wpisuje po założeniu property w GSC/Bing.
+  // Main verification method: DNS TXT. Meta tag below is a fallback.
+  verification: {
+    google: "PLACEHOLDER_GOOGLE_VERIFICATION",
+    other: { "msvalidate.01": "PLACEHOLDER_BING_VERIFICATION" },
+  },
 };
 
 export default function RootLayout({

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Polityka prywatności | KomuPrzekazac.pl',
     description: 'Polityka prywatności serwisu KomuPrzekazac.pl',
+    url: 'https://komuprzekazac.pl/polityka-prywatnosci',
   },
 };
 

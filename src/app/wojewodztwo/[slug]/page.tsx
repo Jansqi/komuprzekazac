@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `Organizacje OPP - woj. ${name} | KomuPrzekazac.pl`,
       description,
+      url: `https://komuprzekazac.pl/wojewodztwo/${slug}`,
     },
   };
 }

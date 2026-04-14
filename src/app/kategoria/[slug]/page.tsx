@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${name} - organizacje OPP | KomuPrzekazac.pl`,
       description,
+      url: `https://komuprzekazac.pl/kategoria/${slug}`,
     },
   };
 }
